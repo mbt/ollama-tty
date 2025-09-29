@@ -2,6 +2,7 @@
 
 TARGET = chat
 CFLAGS = -Wall -std=c99
+LDFLAGS = -lcurl
 
 all: release
 
@@ -12,7 +13,7 @@ release: CFLAGS += -O2 -DNDEBUG
 release: $(TARGET)
 
 $(TARGET): chat.c
-	gcc $(CFLAGS) -o $@ $<
+	gcc $(CFLAGS) $(LDFLAGS) -o $@ $<
 
 clean:
 	rm -f $(TARGET)

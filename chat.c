@@ -9,6 +9,7 @@
 #include <signal.h>
 #include <string.h>
 #include <fcntl.h>
+#include <curl/curl.h>
 
 #define MAX_MESSAGES 100
 #define MAX_LINE_LEN 256
@@ -23,6 +24,67 @@ char input_buffer[MAX_LINE_LEN] = {0};
 int rows, cols;
 struct winsize term_size;
 struct termios orig_termios;
+
+/* Global curl handle */
+CURL *curl;
+
+/* Simple JSON parser stub - for response, extract "response" field roughly */
+char* extract_response(const char* json) {
+    const char* key = "\"response\":\"";
+    char* start = strstr(json, key);
+    if (start) {
+        start += strlen(key);
+        char* end = strchr(start, '"');
+        if (end) {
+            size_t len = end - start;
+            char* resp = malloc(len + 1);
+            strncpy(resp, start, len);
+            resp[len] = '\0';
+            return resp;
+        }
+    }
+    return strdup("Sorry, I couldn't process that.");
+}
+
+/* Callback for curl write */
+size_t write_callback(void *contents, size_t size, size_t nmemb, char *response) {
+    size_t realsize = size * nmemb;
+    strncat(response, (char*)contents, realsize);
+    return realsize;
+}
+
+/* Function to get Ollama response */
+char* get_ollama_response(const char* prompt, const char* model) {
+    if (!curl) return strdup("Curl not initialized.");
+
+    char url[256];
+    snprintf(url, sizeof(url), "http://localhost:11434/api/generate");
+
+    char post_data[512];
+    snprintf(post_data, sizeof(post_data),
+        "{\"model\":\"%s\",\"prompt\":\"%s\",\"stream\":false}", model, prompt);
+
+    char response[4096] = {0};
+    struct curl_slist *headers = NULL;
+    headers = curl_slist_append(headers, "Content-Type: application/json");
+
+    curl_easy_setopt(curl, CURLOPT_URL, url);
+    curl_easy_setopt(curl, CURLOPT_POSTFIELDS, post_data);
+    curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
+    curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_callback);
+    curl_easy_setopt(curl, CURLOPT_WRITEDATA, response);
+
+    CURLcode res = curl_easy_perform(curl);
+    curl_slist_free_all(headers);
+
+    if (res != CURLE_OK) {
+        char err[256];
+        snprintf(err, sizeof(err), "Ollama error: %s", curl_easy_strerror(res));
+        return strdup(err);
+    }
+
+    return extract_response(response);
+}
 
 /* Function prototypes */
 void get_term_size(void);
@@ -168,9 +230,9 @@ void process_input(const char* buf, ssize_t n) {
             } else {
                 // Normal message
                 add_message(input_buffer);
-                char response[512];
-                snprintf(response, sizeof(response), "Bot: You said: %s", input_buffer);
-                add_message(response);
+                char* bot_resp = get_ollama_response(input_buffer, "llama3.1");  /* Default model */
+                add_message(bot_resp);
+                free(bot_resp);
                 input_len = 0;
                 input_buffer[0] = '\0';
             }
@@ -249,6 +311,11 @@ int main(void) {
     get_term_size();
     enable_raw_mode();
     setup_terminal();
+
+    /* Initialize curl */
+    curl_global_init(CURL_GLOBAL_DEFAULT);
+    curl = curl_easy_init();
+
     draw_interface();
 
     char buf[32];  /* Larger for sequences */
@@ -265,9 +332,13 @@ int main(void) {
         }
     }
 
+    /* Cleanup curl */
+    curl_easy_cleanup(curl);
+    curl_global_cleanup();
+
     return 0;
 }
 
-/* Compile with: gcc -o chat chat.c */
+/* Compile with: gcc -o chat chat.c -lcurl */
 /* Run: ./chat */
-/* Note: Mouse wheel support is basic; for full mouse, more parsing needed. Handles basic scrolling with keyboard and approximate mouse wheel. */
+/* Note: Mouse wheel support is basic; for full mouse, more parsing needed. Handles basic scrolling with keyboard and approximate mouse wheel. Ollama integration requires local server running. */
