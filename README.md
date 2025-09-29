@@ -32,7 +32,13 @@ Compile with GCC (C99).
 
 ## Repository
 - GitHub: [mbt/ollama-tty](https://github.com/mbt/ollama-tty)
-- License: MIT (add if desired)
+- License: [MIT](LICENSE)
+
+## Future Plans
+- Integrate with Ollama API for AI-powered chat responses.
+- Add more slash commands (e.g., /clear, /help).
+- Support message history persistence.
+- Enhanced mouse support (clicks, selection).
 
 ## Dependencies
 - Standard C library (POSIX compliant, tested on macOS).
