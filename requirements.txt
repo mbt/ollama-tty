@@ -1,5 +1,6 @@
 # MCP-Enabled Autonomous Development Team
 # Python Dependencies
+# Requires Python 3.11+
 
 # Async HTTP client and server
 aiohttp>=3.9.0
@@ -12,8 +13,7 @@ rich>=13.7.0
 # For now, we're using aiohttp for a simplified implementation
 # mcp>=1.0.0
 
-# Async utilities
-asyncio-timeout>=4.0.3
+# Note: asyncio.timeout is built into Python 3.11+, so no external dependency needed
 
 # JSON schema validation (optional, for robust tool validation)
 jsonschema>=4.20.0
