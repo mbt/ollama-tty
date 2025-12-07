@@ -1,0 +1,432 @@
+Build an E-Commerce Platform with .NET and Blazor
+
+PROJECT OVERVIEW:
+Create a modern, full-stack e-commerce platform using .NET 8, Blazor WebAssembly for the frontend, ASP.NET Core Web API for the backend, and SQL Server for data persistence. Include admin panel, payment processing, and order management.
+
+CORE FEATURES:
+
+1. Customer Frontend (Blazor WebAssembly)
+   - Product catalog with search and filtering
+   - Product detail pages with images and reviews
+   - Shopping cart management
+   - Checkout process with multiple payment options
+   - User account management
+   - Order history and tracking
+   - Wishlist functionality
+   - Product reviews and ratings
+
+2. Admin Panel (Blazor Server)
+   - Dashboard with sales analytics
+   - Product management (CRUD operations)
+   - Category and brand management
+   - Order management and fulfillment
+   - Customer management
+   - Inventory tracking
+   - Sales reports and analytics
+   - Discount and coupon management
+
+3. Authentication & Authorization
+   - ASP.NET Core Identity
+   - JWT token authentication
+   - Role-based access control (Customer, Admin, Manager)
+   - OAuth providers (Google, Microsoft, Facebook)
+   - Two-factor authentication (2FA)
+   - Email verification
+   - Password reset functionality
+
+4. Product Management
+   - Product variants (size, color, etc.)
+   - Product categories and subcategories
+   - Product images (multiple per product)
+   - Stock management
+   - Price management with discounts
+   - Product attributes and specifications
+   - Related products
+
+5. Shopping Cart & Checkout
+   - Persistent shopping cart
+   - Cart totals with tax calculation
+   - Shipping options and costs
+   - Discount code application
+   - Guest checkout option
+   - Order summary
+   - Email confirmations
+
+6. Payment Processing
+   - Stripe integration
+   - PayPal integration
+   - Credit card processing
+   - Payment history
+   - Refund processing
+   - Secure payment handling
+
+7. Order Management
+   - Order creation and tracking
+   - Order status updates (Pending, Processing, Shipped, Delivered)
+   - Order history
+   - Invoice generation (PDF)
+   - Shipping label integration
+   - Return and refund management
+
+8. Search & Filtering
+   - Full-text search with Azure Search or Elasticsearch
+   - Faceted filtering (category, price, brand, rating)
+   - Sorting options
+   - Search suggestions
+   - Recent searches
+
+9. Notifications
+   - Email notifications (order confirmation, shipping updates)
+   - SignalR for real-time notifications
+   - Admin alerts for low stock
+   - Customer notifications for wishlist items on sale
+
+TECHNICAL STACK:
+
+Backend:
+- .NET 8.0
+- ASP.NET Core Web API
+- Entity Framework Core 8
+- SQL Server 2022
+- SignalR for real-time communication
+- Hangfire for background jobs
+
+Frontend:
+- Blazor WebAssembly (customer site)
+- Blazor Server (admin panel)
+- MudBlazor or Radzen for UI components
+- Blazored.LocalStorage for client-side storage
+
+Authentication:
+- ASP.NET Core Identity
+- JWT Bearer tokens
+- IdentityServer or Duende IdentityServer
+
+Payments:
+- Stripe.NET SDK
+- PayPal REST SDK
+
+Storage:
+- Azure Blob Storage or AWS S3 for images
+- Redis for caching
+
+Messaging:
+- Azure Service Bus or RabbitMQ
+- SendGrid or SMTP for emails
+
+ARCHITECTURE:
+
+Clean Architecture / Onion Architecture:
+```
+Solution Structure:
+├── src/
+│   ├── ECommerce.Domain/              # Entities, Enums, Interfaces
+│   ├── ECommerce.Application/         # Business Logic, DTOs, Services
+│   ├── ECommerce.Infrastructure/      # Data Access, External Services
+│   ├── ECommerce.API/                 # Web API Controllers
+│   ├── ECommerce.Blazor.Client/       # Customer Blazor WASM
+│   └── ECommerce.Blazor.Admin/        # Admin Blazor Server
+├── tests/
+│   ├── ECommerce.UnitTests/
+│   ├── ECommerce.IntegrationTests/
+│   └── ECommerce.E2ETests/
+└── docker/
+    ├── docker-compose.yml
+    └── Dockerfile
+```
+
+PROJECT STRUCTURE DETAILS:
+
+ECommerce.Domain/
+├── Entities/
+│   ├── Product.cs
+│   ├── Category.cs
+│   ├── Order.cs
+│   ├── OrderItem.cs
+│   ├── Customer.cs
+│   ├── ShoppingCart.cs
+│   └── Review.cs
+├── Enums/
+│   ├── OrderStatus.cs
+│   └── PaymentStatus.cs
+├── ValueObjects/
+│   ├── Money.cs
+│   └── Address.cs
+└── Interfaces/
+    └── IRepository.cs
+
+ECommerce.Application/
+├── DTOs/
+│   ├── ProductDto.cs
+│   ├── OrderDto.cs
+│   └── CustomerDto.cs
+├── Services/
+│   ├── ProductService.cs
+│   ├── OrderService.cs
+│   ├── PaymentService.cs
+│   └── EmailService.cs
+├── Mappings/
+│   └── AutoMapperProfile.cs
+├── Validators/
+│   └── FluentValidation validators
+└── Interfaces/
+    └── IProductService.cs
+
+ECommerce.Infrastructure/
+├── Data/
+│   ├── AppDbContext.cs
+│   ├── Repositories/
+│   └── Migrations/
+├── Identity/
+│   └── ApplicationUser.cs
+├── Services/
+│   ├── StripePaymentService.cs
+│   ├── EmailService.cs
+│   └── BlobStorageService.cs
+└── Caching/
+    └── RedisCacheService.cs
+
+ECommerce.API/
+├── Controllers/
+│   ├── ProductsController.cs
+│   ├── OrdersController.cs
+│   ├── AuthController.cs
+│   └── CustomersController.cs
+├── Middleware/
+│   ├── ExceptionHandlingMiddleware.cs
+│   └── JwtMiddleware.cs
+├── Filters/
+│   └── ValidationFilter.cs
+└── Program.cs
+
+ECommerce.Blazor.Client/
+├── Pages/
+│   ├── Index.razor
+│   ├── Products.razor
+│   ├── ProductDetail.razor
+│   ├── Cart.razor
+│   └── Checkout.razor
+├── Components/
+│   ├── ProductCard.razor
+│   ├── CartSummary.razor
+│   └── SearchBar.razor
+├── Services/
+│   ├── ApiService.cs
+│   └── CartService.cs
+└── wwwroot/
+
+ECommerce.Blazor.Admin/
+├── Pages/
+│   ├── Dashboard.razor
+│   ├── ProductManagement.razor
+│   ├── OrderManagement.razor
+│   └── Analytics.razor
+├── Components/
+│   └── Charts/
+└── Services/
+
+DESIGN PATTERNS:
+
+1. Repository Pattern
+   - Generic repository for CRUD operations
+   - Unit of Work pattern
+
+2. CQRS (Command Query Responsibility Segregation)
+   - MediatR for command/query handling
+   - Separate read and write models
+
+3. Specification Pattern
+   - Flexible query building
+   - Reusable business rules
+
+4. Factory Pattern
+   - Payment provider factory
+   - Notification service factory
+
+5. Strategy Pattern
+   - Different payment strategies
+   - Shipping cost calculation strategies
+
+FEATURES IMPLEMENTATION:
+
+API Endpoints:
+```csharp
+// Products
+GET    /api/products
+GET    /api/products/{id}
+POST   /api/products
+PUT    /api/products/{id}
+DELETE /api/products/{id}
+GET    /api/products/search?q={query}
+GET    /api/products/category/{categoryId}
+
+// Orders
+GET    /api/orders
+GET    /api/orders/{id}
+POST   /api/orders
+PUT    /api/orders/{id}/status
+GET    /api/orders/customer/{customerId}
+
+// Cart
+GET    /api/cart
+POST   /api/cart/items
+PUT    /api/cart/items/{id}
+DELETE /api/cart/items/{id}
+POST   /api/cart/checkout
+
+// Auth
+POST   /api/auth/register
+POST   /api/auth/login
+POST   /api/auth/refresh-token
+POST   /api/auth/forgot-password
+POST   /api/auth/reset-password
+```
+
+DATABASE SCHEMA:
+
+Key Tables:
+- Products (Id, Name, Description, Price, StockQuantity, CategoryId)
+- Categories (Id, Name, ParentCategoryId)
+- Orders (Id, CustomerId, OrderDate, Status, TotalAmount)
+- OrderItems (Id, OrderId, ProductId, Quantity, Price)
+- Customers (Id, Email, FirstName, LastName, IdentityUserId)
+- ShoppingCarts (Id, CustomerId, CreatedDate)
+- CartItems (Id, CartId, ProductId, Quantity)
+- Reviews (Id, ProductId, CustomerId, Rating, Comment)
+- Addresses (Id, CustomerId, Street, City, State, ZipCode)
+- Payments (Id, OrderId, Amount, Status, TransactionId)
+
+TESTING STRATEGY:
+
+Unit Tests (xUnit):
+- Service layer tests
+- Business logic validation
+- AutoMapper configuration tests
+- Repository tests with in-memory database
+
+Integration Tests:
+- API endpoint tests
+- Database integration tests
+- Authentication flow tests
+- Payment processing tests
+
+E2E Tests (Playwright or Selenium):
+- Customer purchase flow
+- Admin product management
+- User registration and login
+- Cart operations
+
+SECURITY:
+
+- HTTPS enforcement
+- JWT token with refresh token
+- CORS configuration
+- SQL injection prevention (EF Core parameterized queries)
+- XSS protection
+- CSRF tokens for Blazor Server
+- Rate limiting
+- Input validation with FluentValidation
+- Secure payment data handling (PCI compliance)
+- Password hashing with Identity
+- Logging and monitoring
+
+PERFORMANCE OPTIMIZATION:
+
+- Response caching
+- Redis distributed cache
+- Database indexing
+- Lazy loading / Eager loading optimization
+- Image optimization and CDN
+- API pagination
+- SignalR connection optimization
+- Blazor WebAssembly lazy loading
+
+MONITORING & LOGGING:
+
+- Serilog for structured logging
+- Application Insights or Seq
+- Health checks endpoint
+- Custom metrics and performance counters
+- Error tracking with Sentry or Raygun
+
+CI/CD:
+
+- GitHub Actions or Azure DevOps
+- Automated testing
+- Code quality checks (SonarQube)
+- Docker containerization
+- Kubernetes deployment
+- Blue-green deployment
+
+DEPLOYMENT:
+
+- Docker containers
+- Azure App Service or AWS Elastic Beanstalk
+- SQL Server on Azure or RDS
+- Redis cache (Azure Redis Cache or ElastiCache)
+- CDN for static assets
+- Load balancer for scalability
+
+DOCUMENTATION:
+
+- API documentation with Swagger/OpenAPI
+- Architecture documentation
+- Database schema diagrams
+- Deployment guide
+- User manuals
+- Code documentation (XML comments)
+
+THIRD-PARTY PACKAGES:
+
+- AutoMapper - Object mapping
+- FluentValidation - Input validation
+- MediatR - CQRS pattern
+- Serilog - Logging
+- Hangfire - Background jobs
+- SignalR - Real-time communication
+- Stripe.NET - Payment processing
+- Azure.Storage.Blobs - File storage
+- StackExchange.Redis - Caching
+- MudBlazor - Blazor UI components
+- xUnit - Testing
+- Moq - Mocking
+
+DELIVERABLES:
+
+1. Complete .NET solution with all projects
+2. Database scripts and migrations
+3. Comprehensive test suite
+4. Docker configuration
+5. CI/CD pipeline configuration
+6. API documentation
+7. Admin user guide
+8. Deployment guide
+9. Architecture documentation
+
+ESTIMATED TIMELINE:
+
+- Project Setup & Architecture: 3 days
+- Database Design & EF Core Setup: 3 days
+- Identity & Authentication: 4 days
+- Product Management: 5 days
+- Shopping Cart: 3 days
+- Checkout & Payment: 5 days
+- Order Management: 4 days
+- Admin Panel: 6 days
+- Search & Filtering: 3 days
+- Email & Notifications: 2 days
+- Testing: 5 days
+- Documentation: 3 days
+- Deployment Setup: 2 days
+
+TOTAL: 6-8 weeks with 2-3 developers
+
+MINIMUM VIABLE PRODUCT (MVP):
+- Product catalog with basic search
+- Shopping cart
+- Checkout with Stripe
+- Order management
+- Admin panel for products
+- Basic authentication
+
+Can be delivered in 4 weeks with focused effort.
