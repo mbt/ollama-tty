@@ -1,0 +1,282 @@
+Build an iOS Weather App with SwiftUI
+
+PROJECT OVERVIEW:
+Create a native iOS weather application using SwiftUI that displays current weather conditions, forecasts, and weather alerts for multiple locations with a beautiful, modern interface.
+
+CORE FEATURES:
+
+1. Weather Data Display
+   - Current weather conditions (temperature, humidity, wind speed, pressure)
+   - Hourly forecast for next 24 hours
+   - 7-day weather forecast
+   - Weather condition icons and animations
+   - Sunrise/sunset times
+   - UV index and air quality
+
+2. Location Management
+   - Current location weather (using CoreLocation)
+   - Search and add multiple cities
+   - Save favorite locations
+   - Swipe between saved locations
+   - Delete saved locations
+
+3. Weather Alerts
+   - Push notifications for severe weather
+   - Alert badges on location cards
+   - Detailed alert information
+   - Custom alert preferences
+
+4. User Interface
+   - SwiftUI-based modern design
+   - Dark mode support
+   - Smooth animations and transitions
+   - Pull-to-refresh functionality
+   - Loading states and error handling
+   - Accessibility support (VoiceOver, Dynamic Type)
+
+5. Data Persistence
+   - Core Data for saved locations
+   - UserDefaults for preferences
+   - Cache weather data for offline viewing
+   - Background refresh
+
+6. Settings
+   - Temperature units (Celsius/Fahrenheit)
+   - Wind speed units
+   - Notification preferences
+   - Privacy settings
+   - About screen
+
+TECHNICAL REQUIREMENTS:
+
+Language & Framework:
+- Swift 5.9+
+- SwiftUI for UI
+- Combine for reactive programming
+- iOS 16.0+ deployment target
+- Xcode 15.0+
+
+Architecture:
+- MVVM (Model-View-ViewModel) pattern
+- Repository pattern for data layer
+- Dependency injection
+- Protocol-oriented design
+
+APIs & Services:
+- Weather API (OpenWeatherMap or WeatherAPI.com)
+- Core Location for GPS
+- User Notifications framework
+- Background App Refresh
+
+Data Persistence:
+- Core Data for location storage
+- UserDefaults for settings
+- Keychain for API keys
+- File system for cached images
+
+Networking:
+- URLSession with async/await
+- Codable for JSON parsing
+- Custom API client with error handling
+- Network reachability monitoring
+
+DESIGN PATTERNS:
+
+1. MVVM Architecture
+   - ViewModels for business logic
+   - Models for data structures
+   - Views for UI components
+   - Services for external dependencies
+
+2. Coordinator Pattern (optional)
+   - Navigation flow management
+   - Deep linking support
+
+3. Repository Pattern
+   - Abstract data sources
+   - Local and remote data handling
+   - Caching strategy
+
+PROJECT STRUCTURE:
+
+WeatherApp/
+├── App/
+│   ├── WeatherApp.swift
+│   └── AppDelegate.swift
+├── Models/
+│   ├── Weather.swift
+│   ├── Location.swift
+│   └── Forecast.swift
+├── ViewModels/
+│   ├── WeatherViewModel.swift
+│   ├── LocationViewModel.swift
+│   └── SettingsViewModel.swift
+├── Views/
+│   ├── MainWeatherView.swift
+│   ├── LocationListView.swift
+│   ├── DetailedForecastView.swift
+│   ├── SettingsView.swift
+│   └── Components/
+│       ├── WeatherCard.swift
+│       ├── HourlyForecastView.swift
+│       └── WeatherIconView.swift
+├── Services/
+│   ├── WeatherService.swift
+│   ├── LocationService.swift
+│   ├── NotificationService.swift
+│   └── NetworkService.swift
+├── Repositories/
+│   ├── WeatherRepository.swift
+│   └── LocationRepository.swift
+├── Utilities/
+│   ├── Extensions/
+│   ├── Constants.swift
+│   └── Helpers.swift
+├── Resources/
+│   ├── Assets.xcassets
+│   ├── Localizable.strings
+│   └── WeatherData.xcdatamodeld
+└── Tests/
+    ├── WeatherAppTests/
+    └── WeatherAppUITests/
+
+TESTING:
+
+Unit Tests:
+- Test ViewModels with mock services
+- Test data models and parsing
+- Test business logic
+- Minimum 80% code coverage
+
+UI Tests:
+- Test critical user flows
+- Test navigation
+- Test accessibility
+- Screenshot tests
+
+Integration Tests:
+- Test API integration
+- Test Core Data operations
+- Test notification handling
+
+FEATURES TO IMPLEMENT:
+
+Phase 1 - Core Functionality:
+- Current weather display
+- Location detection
+- Basic UI with SwiftUI
+- API integration
+
+Phase 2 - Extended Features:
+- Multiple locations
+- 7-day forecast
+- Weather alerts
+- Data persistence
+
+Phase 3 - Polish:
+- Animations and transitions
+- Dark mode
+- Accessibility
+- Widget support (iOS 17+)
+
+Phase 4 - Advanced:
+- Apple Watch companion app
+- Siri shortcuts
+- Live Activities (iOS 16+)
+- Interactive widgets
+
+DESIGN GUIDELINES:
+
+UI/UX:
+- Follow Apple Human Interface Guidelines
+- Use SF Symbols for icons
+- Implement haptic feedback
+- Smooth, fluid animations
+- Intuitive gestures
+
+Colors:
+- Dynamic colors for light/dark mode
+- Weather-condition-based gradients
+- Accessible color contrast ratios
+
+Typography:
+- San Francisco font (system default)
+- Dynamic Type support
+- Clear hierarchy
+
+SECURITY & PRIVACY:
+
+- Secure API key storage in Keychain
+- Location permission handling
+- Privacy manifest (iOS 17+)
+- Data encryption at rest
+- No data collection/analytics (privacy-first)
+
+PERFORMANCE:
+
+- Lazy loading of data
+- Image caching
+- Efficient Core Data queries
+- Background fetch optimization
+- Memory management
+
+ACCESSIBILITY:
+
+- VoiceOver support for all elements
+- Dynamic Type support
+- High contrast mode
+- Reduce motion support
+- Color blind friendly
+
+CI/CD:
+
+- Xcode Cloud or GitHub Actions
+- Automated testing
+- Code signing automation
+- TestFlight distribution
+- App Store submission automation
+
+DOCUMENTATION:
+
+- Code documentation with DocC
+- README with setup instructions
+- Architecture decision records
+- API documentation
+- User guide
+
+DELIVERABLES:
+
+1. Complete iOS app project
+2. Unit and UI test suites
+3. Xcode project configuration
+4. API integration documentation
+5. Privacy policy
+6. App Store assets (screenshots, description)
+7. TestFlight build
+8. App Store submission package
+
+DEPENDENCIES (via Swift Package Manager):
+
+- Alamofire (optional, for networking)
+- Kingfisher (for image caching)
+- SwiftLint (code quality)
+
+APP STORE REQUIREMENTS:
+
+- App icons (all sizes)
+- Launch screen
+- Privacy policy
+- App description and keywords
+- Screenshots for all device sizes
+- App preview video (optional)
+
+ESTIMATED TIMELINE:
+- Architecture & Setup: 2 days
+- Core Weather Features: 5 days
+- Location Management: 3 days
+- UI/UX Polish: 4 days
+- Testing: 3 days
+- Documentation: 2 days
+- App Store Submission: 1 day
+
+TOTAL: 3-4 weeks for single developer
