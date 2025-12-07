@@ -1,0 +1,28 @@
+# MCP-Enabled Autonomous Development Team
+# Python Dependencies
+
+# Async HTTP client and server
+aiohttp>=3.9.0
+
+# Terminal UI
+rich>=13.7.0
+
+# MCP SDK (Model Context Protocol)
+# Note: In production, this would use the official MCP SDK
+# For now, we're using aiohttp for a simplified implementation
+# mcp>=1.0.0
+
+# Async utilities
+asyncio-timeout>=4.0.3
+
+# JSON schema validation (optional, for robust tool validation)
+jsonschema>=4.20.0
+
+# Date/time utilities
+python-dateutil>=2.8.2
+
+# Development dependencies (optional)
+# pytest>=7.4.0
+# pytest-asyncio>=0.21.0
+# black>=23.0.0
+# mypy>=1.7.0

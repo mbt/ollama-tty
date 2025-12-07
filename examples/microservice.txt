@@ -1,0 +1,140 @@
+Build a User Notification Microservice
+
+OVERVIEW:
+Create a standalone microservice that handles user notifications across multiple channels (email, SMS, push notifications) with queuing, retry logic, and delivery tracking.
+
+CORE FEATURES:
+
+1. Multi-Channel Notification Support
+   - Email notifications via SMTP
+   - SMS via Twilio/AWS SNS
+   - Push notifications (Firebase Cloud Messaging)
+   - In-app notifications
+
+2. Notification Management
+   - Send single notification
+   - Bulk notification sending
+   - Scheduled notifications
+   - Recurring notifications
+   - Template-based notifications
+
+3. Delivery Tracking
+   - Delivery status tracking
+   - Read receipts
+   - Bounce handling
+   - Retry mechanism with exponential backoff
+   - Dead letter queue for failed notifications
+
+4. User Preferences
+   - Opt-in/opt-out per channel
+   - Notification frequency settings
+   - Quiet hours configuration
+   - Category-based preferences
+
+5. Template Engine
+   - HTML email templates
+   - Variable substitution
+   - Multi-language support
+   - Template versioning
+
+6. Analytics & Reporting
+   - Delivery success rates
+   - Channel performance metrics
+   - User engagement tracking
+   - Cost tracking per channel
+
+TECHNICAL REQUIREMENTS:
+
+API:
+- FastAPI framework
+- REST and gRPC endpoints
+- API versioning
+- Request validation
+- Rate limiting
+
+Database:
+- PostgreSQL for notification records
+- Redis for caching and queuing
+- MongoDB for template storage (optional)
+
+Message Queue:
+- RabbitMQ or AWS SQS
+- Priority queues
+- Dead letter queues
+- Message persistence
+
+External Integrations:
+- SendGrid/AWS SES for email
+- Twilio for SMS
+- Firebase Cloud Messaging
+- Slack/Discord webhooks
+
+ARCHITECTURE:
+
+Components:
+1. API Layer
+   - REST endpoints
+   - gRPC service
+   - Authentication middleware
+   - Request validation
+
+2. Notification Service
+   - Channel routing
+   - Template rendering
+   - Delivery management
+   - Retry logic
+
+3. Queue Workers
+   - Email worker
+   - SMS worker
+   - Push notification worker
+   - Webhook worker
+
+4. Scheduler Service
+   - Cron-based scheduler
+   - Recurring notification handler
+   - Scheduled send processor
+
+TESTING:
+- Unit tests with pytest
+- Integration tests for all channels
+- Mock external services
+- Load testing with Locust
+- Test coverage > 85%
+
+DEPLOYMENT:
+- Dockerized application
+- Kubernetes manifests
+- Helm chart
+- Health check endpoints
+- Graceful shutdown
+
+MONITORING:
+- Prometheus metrics
+- Custom metrics (delivery rates, latency)
+- Grafana dashboards
+- Logging to stdout (JSON format)
+- Distributed tracing
+
+SECURITY:
+- API key authentication
+- JWT token support
+- Rate limiting per client
+- Input sanitization
+- Secrets management
+
+DOCUMENTATION:
+- OpenAPI specification
+- Architecture diagram
+- Setup guide
+- API examples
+- Troubleshooting guide
+
+DELIVERABLES:
+1. Microservice application
+2. Docker configuration
+3. Kubernetes deployment files
+4. Test suite
+5. API documentation
+6. Monitoring dashboards
+7. Deployment guide

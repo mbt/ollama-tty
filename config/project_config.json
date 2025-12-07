@@ -1,0 +1,66 @@
+{
+  "project": {
+    "name": "MCP Autonomous Dev Team",
+    "id": "proj-default-001",
+    "min_workers": 2,
+    "max_workers": 8,
+    "auto_scale": true
+  },
+  "workers": {
+    "profiles": [
+      {
+        "type": "developer",
+        "count": 3,
+        "capabilities": ["python", "fastapi", "postgresql", "docker"],
+        "model": "claude-3-5-sonnet-20241022",
+        "max_concurrent_tasks": 2,
+        "timeout_seconds": 3600
+      },
+      {
+        "type": "tester",
+        "count": 2,
+        "capabilities": ["pytest", "httpx", "selenium", "test_design"],
+        "model": "claude-3-5-haiku-20241022",
+        "max_concurrent_tasks": 3,
+        "timeout_seconds": 1800
+      },
+      {
+        "type": "devops",
+        "count": 1,
+        "capabilities": ["docker", "github_actions", "terraform", "aws"],
+        "model": "claude-3-5-haiku-20241022",
+        "max_concurrent_tasks": 2,
+        "timeout_seconds": 2400
+      },
+      {
+        "type": "architect",
+        "count": 1,
+        "capabilities": ["system_design", "code_review", "integration", "architecture"],
+        "model": "claude-3-5-opus-20241022",
+        "max_concurrent_tasks": 1,
+        "timeout_seconds": 3600
+      }
+    ]
+  },
+  "mcp_server": {
+    "host": "localhost",
+    "port": 8080,
+    "enable_cors": false,
+    "max_connections": 100,
+    "request_timeout": 30.0
+  },
+  "logging": {
+    "level": "DEBUG",
+    "include_network_io": true,
+    "log_file": "logs/project_activity.log",
+    "rotation": "daily",
+    "max_file_size_mb": 100,
+    "retention_days": 30
+  },
+  "display": {
+    "refresh_rate_hz": 1.0,
+    "show_network_io_realtime": false,
+    "color_scheme": "dark",
+    "worker_panel_height": 5
+  }
+}
