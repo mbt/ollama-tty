@@ -1,0 +1,55 @@
+Build a RESTful API for a task management system with the following features:
+
+CORE FEATURES:
+1. User authentication with JWT tokens
+   - Registration and login endpoints
+   - Password hashing with bcrypt
+   - Token refresh mechanism
+
+2. CRUD operations for tasks
+   - Create new tasks with title, description, due date
+   - Update task status (pending, in_progress, completed)
+   - Delete tasks
+   - List all tasks with filtering and pagination
+
+3. Task assignment
+   - Assign tasks to users
+   - View tasks assigned to specific user
+   - Reassign tasks
+
+4. Due date tracking
+   - Set and update due dates
+   - Query overdue tasks
+   - Send reminders (basic implementation)
+
+TECHNICAL REQUIREMENTS:
+- Python 3.11+
+- FastAPI framework for REST API
+- SQLAlchemy ORM for database interactions
+- PostgreSQL database
+- Pydantic for data validation
+- Alembic for database migrations
+
+TESTING:
+- Comprehensive unit tests with pytest
+- Integration tests for all endpoints
+- Minimum 80% code coverage
+- Test fixtures for database setup
+
+DEPLOYMENT:
+- Dockerfile for containerization
+- docker-compose.yml for development environment
+- Environment variable configuration
+- Health check endpoint
+
+DOCUMENTATION:
+- OpenAPI/Swagger automatic documentation
+- README with setup instructions
+- API endpoint examples
+- Database schema diagram
+
+DELIVERABLES:
+- Fully functional API
+- Complete test suite
+- Docker configuration
+- Comprehensive documentation

@@ -1,0 +1,160 @@
+Build an Enterprise Customer Portal with Advanced Features
+
+PROJECT OVERVIEW:
+Create a comprehensive customer portal for enterprise clients with role-based access control, analytics dashboard, multi-tenant architecture, and integration capabilities.
+
+CORE MODULES:
+
+1. Authentication & Authorization
+   - Multi-factor authentication (MFA)
+   - Single Sign-On (SSO) with SAML 2.0
+   - OAuth 2.0 / OpenID Connect
+   - Role-based access control (RBAC)
+   - Fine-grained permissions system
+   - Session management with Redis
+   - Password policies and rotation
+
+2. Multi-Tenant Architecture
+   - Tenant isolation at database level
+   - Custom branding per tenant
+   - Tenant-specific configuration
+   - Resource quotas and limits
+   - Tenant analytics and reporting
+
+3. Customer Dashboard
+   - Real-time analytics widgets
+   - Customizable dashboard layouts
+   - Data visualization (charts, graphs)
+   - KPI tracking
+   - Export capabilities (PDF, Excel, CSV)
+   - Scheduled reports via email
+
+4. Document Management
+   - Secure file upload/download
+   - Version control for documents
+   - Document categorization and tagging
+   - Full-text search
+   - Access control per document
+   - Audit trail for document access
+
+5. Support Ticketing System
+   - Create, update, close tickets
+   - Priority levels and SLA tracking
+   - File attachments
+   - Email notifications
+   - Ticket assignment and routing
+   - Knowledge base integration
+
+6. Billing & Invoicing
+   - Invoice generation
+   - Payment history
+   - Multiple payment methods
+   - Subscription management
+   - Usage-based billing
+   - Tax calculation
+
+7. API Management
+   - RESTful API with versioning
+   - GraphQL endpoint
+   - API key management
+   - Rate limiting
+   - API usage analytics
+   - Webhook support
+
+TECHNICAL STACK:
+
+Backend:
+- Python 3.11+ with FastAPI
+- PostgreSQL for primary data store
+- Redis for caching and sessions
+- Celery for background tasks
+- RabbitMQ/Redis for message queue
+- Elasticsearch for search
+
+Frontend (Backend for Frontend pattern):
+- Next.js/React for web interface
+- TypeScript for type safety
+- TailwindCSS for styling
+- React Query for data fetching
+
+Infrastructure:
+- Docker and Kubernetes
+- Nginx as reverse proxy
+- Let's Encrypt for SSL
+- AWS S3 for file storage
+- CloudFront for CDN
+
+SECURITY:
+- Input validation and sanitization
+- SQL injection prevention
+- XSS protection
+- CSRF tokens
+- Rate limiting
+- Security headers
+- Audit logging
+- Data encryption at rest and in transit
+- Regular security scanning
+
+TESTING:
+- Unit tests (90% coverage minimum)
+- Integration tests
+- End-to-end tests with Playwright
+- Load testing with Locust
+- Security testing (OWASP Top 10)
+- API contract testing
+
+MONITORING & OBSERVABILITY:
+- Prometheus for metrics
+- Grafana for visualization
+- ELK stack for logging
+- Distributed tracing with Jaeger
+- Uptime monitoring
+- Error tracking with Sentry
+
+CI/CD:
+- GitHub Actions for CI/CD
+- Automated testing in pipeline
+- Code quality checks (SonarQube)
+- Automated security scanning
+- Blue-green deployment
+- Automated rollback capability
+
+DOCUMENTATION:
+- API documentation (OpenAPI/Swagger)
+- Architecture Decision Records (ADR)
+- Database schema documentation
+- Deployment guides
+- User manuals
+- API client libraries (Python, JavaScript)
+
+COMPLIANCE:
+- GDPR compliance
+- SOC 2 Type II considerations
+- Data retention policies
+- Privacy policy implementation
+- Terms of service
+
+DELIVERABLES:
+1. Fully functional enterprise portal
+2. Complete test suite
+3. Deployment automation
+4. Comprehensive documentation
+5. Monitoring dashboards
+6. Security audit report
+7. Performance benchmarks
+8. Training materials
+
+TIMELINE ESTIMATION:
+- Planning & Architecture: 1 week
+- Core Authentication: 1 week
+- Multi-tenant Setup: 1 week
+- Dashboard & Analytics: 2 weeks
+- Document Management: 1 week
+- Support System: 1 week
+- Billing Module: 1 week
+- API & Integration: 1 week
+- Testing & QA: 2 weeks
+- Documentation: 1 week
+- Deployment & Monitoring: 1 week
+
+TOTAL ESTIMATED EFFORT: 13-14 weeks with 6-8 developers
