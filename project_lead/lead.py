@@ -16,7 +16,7 @@ from typing import List, Dict, Any, Optional
 from datetime import datetime
 
 from workers.worker import MCPClient
-from logging.json_logger import JSONLogger
+from json_logging.json_logger import JSONLogger
 
 
 class ProjectLead:

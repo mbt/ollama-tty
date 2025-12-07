@@ -14,7 +14,7 @@ from pathlib import Path
 
 from .context_store import ContextStore
 from .tools import register_tools
-from logging.json_logger import JSONLogger
+from json_logging.json_logger import JSONLogger
 
 
 class MCPServer:

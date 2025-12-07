@@ -23,7 +23,7 @@ from project_lead.lead import ProjectLead
 from workers.worker import Worker, WorkerType
 from display.terminal_ui import TerminalStatusDisplay
 from mcp_server.server import MCPServer
-from logging.json_logger import JSONLogger
+from json_logging.json_logger import JSONLogger
 
 
 def parse_args():

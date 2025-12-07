@@ -11,7 +11,7 @@ from enum import Enum
 from typing import List, Optional, Dict, Any
 import aiohttp
 
-from logging.json_logger import JSONLogger
+from json_logging.json_logger import JSONLogger
 
 
 class WorkerType(Enum):
